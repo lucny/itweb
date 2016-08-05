@@ -1,3 +1,24 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'music/css/style.css' %}">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navar-header">
+            <a href="" class="">Pokus</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
 {% if all_albums %}
     <h1>Hudba - seznam alb</h1>
     <ul>
@@ -8,3 +29,6 @@
 {% else %}
     <h3>Neexistuje zadne album</h3>
 {% endif %}
+        </div>
+    </div>
+</div>
