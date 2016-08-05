@@ -1,22 +1,15 @@
-from django.http import HttpResponse
+from django.http import Http404
+from django.shortcuts import render
 from .models import Album
+from .models import Song
 
 def index(request):
-    html = ''
     all_albums = Album.objects.all()
-    html += '<h1>Hudba - seznam alb</h1>'
-    html += '<ul>'
-    for album in all_albums:
-        url = '/music/' + str(album.id) + '/'
-        html += '<li><a href="'+url+'">'+ album.album_title +'</a></li>'
-    html += '</ul>'
-    return HttpResponse(html)
+    return render(request,'music/index.html',{'all_albums' : all_albums})
 
 def detail(request, album_id):
-    html = ''
-    album = Album.objects.get(id=album_id)
-    html += '<h1>Hudba - detail o albu</h1>'
-    html += '<h2>' + album.album_title + '</h2>'
-    html += '<p>Umelec: ' + album.artist + '</p>'
-    html += '<p>Zanr: ' + album.genre + '</p>'
-    return HttpResponse(html)
+    try:
+        album = Album.objects.get(pk=album_id)
+    except Album.DoesNotExist:
+        raise Http404('Album neexistuje')
+    return render(request,'music/detail.html',{'album' : album})

@@ -1,0 +1,14 @@
+{% if album %}
+    <h1>Hudba - informace o albu</h1>
+    <h2>{{ album.album_title }}</h2>
+    <p>Umělec: {{ album.artist }}</p>
+    <p>Žánr: {{ album.genre }}</p>
+    <h3>Písně v albu</h3>
+    <ul>
+        {% for song in album.song_set.all %}
+        <li>{{ song.song_title }} ({{ song.song_length }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>Neexistuje zadne album</h3>
+{% endif %}
