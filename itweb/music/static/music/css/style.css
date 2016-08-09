@@ -1,3 +1,11 @@
 h1 {
     color: #ff2f3b;
 }
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-brand {
+    font-family: 'Satisfy', cursive;
+}

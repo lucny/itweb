@@ -1,26 +1,36 @@
-{% if album %}
-    <h1>Hudba - informace o albu</h1>
-    <h2>{{ album.album_title }}</h2>
-    <p>Umělec: {{ album.artist }}</p>
-    <p>Žánr: {{ album.genre }}</p>
+{% extends 'music/base.html' %}
+{% block title %}Hudba - informace o skladbách{% endblock %}
+{% block body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                {% if album %}
+                    <h1>Hudba - informace o albu</h1>
+                    <h2>{{ album.album_title }}</h2>
+                    <p>Umělec: {{ album.artist }}</p>
+                    <p>Žánr: {{ album.genre }}</p>
 
-    {% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-    {% endif %}
-    <h3>Písně v albu</h3>
-    <form action="{% url 'music:favorite' album.id %}" method="post">
-        {% csrf_token %}
-        <ul>
-        {%  for song in album.song_set.all %}
-            <li><input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />
-            <label for="song{{ forloop.counter }}">{{ song.song_title }} ({{ song.song_length }})
-            {% if song.is_favorite %}*{% endif %}
-            </label>
-            </li>
-        {% endfor %}
-        </ul>
-        <input type="submit" value="favorite">
-    </form>
-{% else %}
-    <h3>Neexistuje zadne album</h3>
-{% endif %}
+                    {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <h3>Písně v albu</h3>
+                    <form action="{% url 'music:favorite' album.id %}" method="post">
+                        {% csrf_token %}
+                        <ul>
+                        {%  for song in album.song_set.all %}
+                            <li><input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />
+                            <label for="song{{ forloop.counter }}">{{ song.song_title }} ({{ song.song_length }})
+                            {% if song.is_favorite %}*{% endif %}
+                            </label>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <input type="submit" value="favorite">
+                    </form>
+                {% else %}
+                    <h3>Neexistuje zadne album</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
